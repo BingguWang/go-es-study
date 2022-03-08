@@ -58,11 +58,11 @@ func FindAll() {
 		fmt.Println(*u)
 	}
 	/**
-		"_source": {
-						"name": "wb",
-						"age": 12,
-						"married": false
-	                }
+	  	"_source": {
+	  					"name": "wb",
+	  					"age": 12,
+	  					"married": false
+	                  }
 	*/
 	var userindex entity.UserIndex
 	for i, item := range re.Each(reflect.TypeOf(userindex)) { // each里有对JSON进行解码, 其实也是对Source成员解码的
