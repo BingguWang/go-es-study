@@ -1,6 +1,6 @@
-package entity
+package document
 
-type UserIndex struct {
+type UserDocument struct {
 	Name    string `json:"name"`
 	Age     int    `json:"age"`
 	Married bool   `json:"married"`
