@@ -7,10 +7,12 @@ import (
 	"fmt"
 	"github.com/BingguWang/go-es-study/datasource"
 	"github.com/BingguWang/go-es-study/document"
+	"github.com/BingguWang/go-es-study/op"
 	"github.com/BingguWang/go-es-study/utils"
 	elastic8 "github.com/elastic/go-elasticsearch/v8"
 	"github.com/elastic/go-elasticsearch/v8/esapi"
 	"log"
+	"strconv"
 	"strings"
 	"sync"
 	"testing"
@@ -24,7 +26,8 @@ var client *elastic8.Client
 
 func init() {
 	addrs := []string{
-		"https://10.11.17.4:9200",
+		//"https://10.11.17.4:9200",
+		"https://139.9.221.92:9200",
 	}
 	datasource.InitESClient("../datasource/ca.crt", addrs...)
 	client = datasource.GetESClient()
@@ -169,4 +172,16 @@ func TestUpdateIncrease(t *testing.T) {
 		}
 	}
 	return
+}
+
+func TestIndexDoc(t *testing.T) {
+	var wg sync.WaitGroup
+	for i := 0; i < 12; i++ {
+		wg.Add(1)
+		go func(i int) {
+			defer wg.Done()
+			op.IndexDoc("bing_index", strconv.Itoa(i), 0, utils.GetRandomUserDoc())
+		}(i)
+	}
+	wg.Wait()
 }

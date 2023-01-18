@@ -1,10 +1,11 @@
 package vo
 
 type EsJsonResult struct {
-	Took     int   `json:"took" mapstructure:"took"`
-	TimedOut bool  `json:"time_out" mapstructure:"time_out"`
-	Shards   Shard `json:"_shards" mapstructure:"_shards"`
-	Hits     Hits  `json:"hits" mapstructure:"hits"`
+	ScrollId string `json:"_scroll_id"`
+	Took     int    `json:"took" mapstructure:"took"`
+	TimedOut bool   `json:"time_out" mapstructure:"time_out"`
+	Shards   *Shard `json:"_shards" mapstructure:"_shards"`
+	Hits     *Hits  `json:"hits" mapstructure:"hits"`
 }
 type Shard struct {
 	Total      int `json:"total" mapstructure:"total"`
@@ -13,7 +14,7 @@ type Shard struct {
 	Failed     int `json:"failed" mapstructure:"failed"`
 }
 type Hits struct {
-	Total    Total  `json:"total"  mapstructure:"total"`
+	Total    *Total `json:"total"  mapstructure:"total"`
 	MaxScore int    `json:"maxScore"  mapstructure:"maxScore"`
 	Hits     []*Hit `json:"hits" mapstructure:"hits"`
 }

@@ -37,7 +37,7 @@ func GetRandomMsg(l int) string {
 	str := "abcdefghijk lmnopqrstuvwxyz        !."
 	bytes := []byte(str)
 	result := make([]byte, l)
-	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	r := rand.New(rand.NewSource(time.Now().UnixNano() - (int64)(rand.Intn(100))))
 	for i := 0; i < l; i++ {
 		result[i] = bytes[r.Intn(len(bytes))]
 	}
@@ -46,7 +46,7 @@ func GetRandomMsg(l int) string {
 
 func GetRandomUserDoc() *document.UserDocument {
 	var married bool
-	if (time.Now().Second() % 2) == 0 {
+	if ((time.Now().Second() - rand.Intn(100)) % 2) == 0 {
 		married = true
 	}
 	r := &document.UserDocument{

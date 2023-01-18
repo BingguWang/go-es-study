@@ -40,6 +40,8 @@ func GetIndexByIndexName(indexName string, v io.Reader) { // v是请求体
 		client.Search.WithBody(v),
 		client.Search.WithTrackTotalHits(true),
 		client.Search.WithPretty(),
+		client.Search.WithFrom(2), // 页码
+		client.Search.WithSize(2), // 分页大小
 	)
 	if err != nil {
 		log.Fatalf("Error getting response: %s", err)
